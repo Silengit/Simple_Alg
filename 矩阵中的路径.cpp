@@ -19,11 +19,13 @@ public:
             return false;
         else if (str[pos] == matrix[i * cols + j] && !hasItAlready(trace, i * cols + j)) {
             trace.push_back(i * cols + j);
-            bool suc = helper(matrix, trace, rows, cols, i - 1, j, str, pos + 1) ||
+            if(helper(matrix, trace, rows, cols, i - 1, j, str, pos + 1) ||
                 helper(matrix, trace, rows, cols, i + 1, j, str, pos + 1) ||
                 helper(matrix, trace, rows, cols, i, j - 1, str, pos + 1) ||
-                helper(matrix, trace, rows, cols, i, j + 1, str, pos + 1);
-            return suc;
+                helper(matrix, trace, rows, cols, i, j + 1, str, pos + 1))
+                return true;
+            trace.pop_back(); //No need indeed.
+            return false;
         }
         else return false;
     }
